@@ -16,7 +16,18 @@ const url = "http://google.com";
 
 //EXAMPLE 2, download the page
 const destination = fs.createWriteStream('./downloads/google2.html')
-request(url).pipe(destination)
+// request(url)
+//   .pipe(destination)
+
+request(url)
+  .pipe(destination)
+  .on('finish', function() {
+    console.log('all done')
+  })
+  .on('error', function(err) {
+    console.log(err);
+  })
+
 
 app.listen(port, function() {
   console.log('app listening on port 8080')
